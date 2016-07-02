@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/Nicolaas/AndroidStudioProjects/dji-sample/Sample Code/dJISDKLIB/build/intermediates/res/merged/androidTest/debug/xml/accessory_filter.xml",
+        "source": "/Users/Nicolaas/AndroidStudioProjects/dji-sample/Sample Code/dJISDKLIB/build/intermediates/bundles/debug/res/xml/accessory_filter.xml"
+    },
+    {
+        "merged": "/Users/Nicolaas/AndroidStudioProjects/GroundControl/dJISDKLIB/build/intermediates/res/merged/androidTest/debug/xml/accessory_filter.xml",
+        "source": "/Users/Nicolaas/AndroidStudioProjects/GroundControl/dJISDKLIB/build/intermediates/bundles/debug/res/xml/accessory_filter.xml"
+    }
+]
