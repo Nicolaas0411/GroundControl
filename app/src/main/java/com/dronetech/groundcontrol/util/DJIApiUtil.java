@@ -1,4 +1,4 @@
-package util;
+package com.dronetech.groundcontrol.util;
 
 import dji.sdk.Products.DJIAircraft;
 import dji.sdk.base.DJIBaseProduct;

@@ -1,4 +1,4 @@
-package com.dronetech.groundcontrol;
+package com.dronetech.groundcontrol.ui;
 
 import android.app.Application;
 import android.content.Intent;

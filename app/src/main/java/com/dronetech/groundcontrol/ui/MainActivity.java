@@ -1,15 +1,12 @@
-package com.dronetech.groundcontrol;
+package com.dronetech.groundcontrol.ui;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.SurfaceTexture;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.TextureView;
 import android.view.View;
@@ -21,14 +18,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.dronetech.groundcontrol.R;
+import com.dronetech.groundcontrol.util.DJIApiUtil;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import dji.sdk.Camera.DJICamera;
 import dji.sdk.Camera.DJICameraSettingsDef;
 import dji.sdk.Codec.DJICodecManager;
-import dji.sdk.Products.DJIAircraft;
 import dji.sdk.base.DJIBaseComponent;
 import dji.sdk.base.DJIBaseProduct;
 import dji.sdk.base.DJIError;
-import util.DJIApiUtil;
 
 
 public class MainActivity extends Activity implements TextureView.SurfaceTextureListener,View.OnClickListener {
@@ -39,41 +39,23 @@ public class MainActivity extends Activity implements TextureView.SurfaceTexture
 
     // Codec for video live view
     protected DJICodecManager mCodecManager = null;
-    protected TextView mConnectStatusTextView;
-
-    protected TextureView mVideoSurface = null;
-    private Button mCaptureBtn, mShootPhotoModeBtn, mRecordVideoModeBtn;
-    private ToggleButton mRecordBtn;
-    private TextView recordingTime;
+    @Bind(R.id.ConnectStatusTextView) TextView mConnectStatusTextView;
+    @Bind(R.id.video_previewer_surface) TextureView mVideoSurface = null;
+    @Bind(R.id.btn_capture) Button mCaptureBtn;
+    @Bind(R.id.btn_shoot_photo_mode) Button mShootPhotoModeBtn;
+    @Bind(R.id.btn_record_video_mode) Button mRecordVideoModeBtn;
+    @Bind(R.id.btn_record) ToggleButton mRecordBtn;
+    @Bind(R.id.timer) TextView recordingTime;
     private DJIApiUtil djiApiUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         djiApiUtil = new DJIApiUtil();
-        // When the compile and target version is higher than 22, please request the
-        // following permissions at runtime to ensure the
-        // SDK work well.
-
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.VIBRATE,
-                            Manifest.permission.INTERNET, Manifest.permission.ACCESS_WIFI_STATE,
-                            Manifest.permission.WAKE_LOCK, Manifest.permission.ACCESS_COARSE_LOCATION,
-                            Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.ACCESS_FINE_LOCATION,
-                            Manifest.permission.CHANGE_WIFI_STATE, Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
-                            Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.SYSTEM_ALERT_WINDOW,
-                            Manifest.permission.READ_PHONE_STATE,
-                    }
-                    , 1);
-        }
-
         setContentView(R.layout.activity_main);
-
+        ButterKnife.bind(this);
         initUI();
 
         // The callback for receiving the raw H264 video data for camera live view
@@ -97,21 +79,16 @@ public class MainActivity extends Activity implements TextureView.SurfaceTexture
                 @Override
                 public void onResult(DJICamera.CameraSystemState cameraSystemState) {
                     if (null != cameraSystemState) {
-
                         int recordTime = cameraSystemState.getCurrentVideoRecordingTimeInSeconds();
                         int minutes = (recordTime % 3600) / 60;
                         int seconds = recordTime % 60;
-
                         final String timeString = String.format("%02d:%02d", minutes, seconds);
                         final boolean isVideoRecording = cameraSystemState.isRecording();
-
                         MainActivity.this.runOnUiThread(new Runnable() {
 
                             @Override
                             public void run() {
-
                                 recordingTime.setText(timeString);
-
                                 /*
                                  * Update recordingTime TextView visibility and mRecordBtn's check state
                                  */
@@ -192,16 +169,6 @@ public class MainActivity extends Activity implements TextureView.SurfaceTexture
     }
 
     private void initUI() {
-        mConnectStatusTextView = (TextView) findViewById(R.id.ConnectStatusTextView);
-        // init mVideoSurface
-        mVideoSurface = (TextureView) findViewById(R.id.video_previewer_surface);
-
-        recordingTime = (TextView) findViewById(R.id.timer);
-        mCaptureBtn = (Button) findViewById(R.id.btn_capture);
-        mRecordBtn = (ToggleButton) findViewById(R.id.btn_record);
-        mShootPhotoModeBtn = (Button) findViewById(R.id.btn_shoot_photo_mode);
-        mRecordVideoModeBtn = (Button) findViewById(R.id.btn_record_video_mode);
-
         if (null != mVideoSurface) {
             mVideoSurface.setSurfaceTextureListener(this);
         }
@@ -210,8 +177,6 @@ public class MainActivity extends Activity implements TextureView.SurfaceTexture
         mRecordBtn.setOnClickListener(this);
         mShootPhotoModeBtn.setOnClickListener(this);
         mRecordVideoModeBtn.setOnClickListener(this);
-
-//        recordingTime.setVisibility(View.INVISIBLE);
 
         mRecordBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

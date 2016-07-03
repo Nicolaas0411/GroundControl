@@ -1,12 +1,18 @@
 apply plugin: 'com.android.application'
 
+buildscript{
+    ext{
+        butterknifeVersion = '7.0.1'
+    }
+}
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
 
     defaultConfig {
         applicationId "com.dronetech.groundcontrol"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -23,5 +29,6 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.4.0'
+    compile "com.jakewharton:butterknife:$butterknifeVersion"
     compile project(':dJISDKLIB')
 }
