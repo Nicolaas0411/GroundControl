@@ -80,10 +80,11 @@
         <Button
             android:id="@+id/btn_record_video_mode"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Record Video Mode"
             android:layout_weight="1"
-            android:layout_gravity="center_vertical" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Record Video Mode"
+            android:textSize="12sp" />
 
     </LinearLayout>
 

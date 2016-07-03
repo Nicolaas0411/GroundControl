@@ -32,7 +32,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@android:style/Theme.Material.NoActionBar.Fullscreen">
 
         <!-- DJI SDK -->
         <uses-library android:name="com.android.future.usb.accessory" />
@@ -41,8 +41,7 @@
             android:value="5553c9473be0f26c33d91589" />
 
         <activity
-            android:name="dji.sdk.SDKManager.DJIAoaControllerActivity"
-            android:theme="@android:style/Theme.Translucent" >
+            android:name="dji.sdk.SDKManager.DJIAoaControllerActivity">
             <intent-filter>
                 <action android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED" />
             </intent-filter>
@@ -56,12 +55,10 @@
         <!-- DJI SDK -->
 
         <activity android:name=".ui.MainActivity"
-            android:theme="@android:style/Theme.Material"
             android:screenOrientation="landscape">
         </activity>
 
         <activity android:name=".ui.LaunchActivity"
-            android:theme="@android:style/Theme.Material"
             android:screenOrientation="portrait"
             android:hardwareAccelerated="false">
             <intent-filter>
