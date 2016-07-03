@@ -14,14 +14,14 @@ public class DJIApiUtil {
         if (product != null) {
             if (product.isConnected()) {
                 //The product is connected
-                status = " Connected";
+                status = "Connected";
                 ret = true;
             } else {
                 if (product instanceof DJIAircraft) {
                     DJIAircraft aircraft = (DJIAircraft) product;
                     if (aircraft.getRemoteController() != null && aircraft.getRemoteController().isConnected()) {
                         // The product is not connected, but the remote controller is connected
-                        status = "only RC Connected";
+                        status = "Please turn on your aircraft...";
                         ret = true;
                     }
                 }

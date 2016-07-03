@@ -2,7 +2,11 @@ package com.dronetech.groundcontrol.ui;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -16,6 +20,7 @@ import com.dronetech.groundcontrol.util.DJIApiUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import dji.sdk.base.DJIBaseComponent;
 import dji.sdk.base.DJIBaseProduct;
 
 /**
@@ -25,8 +30,6 @@ public class LaunchActivity extends Activity {
 
     private static final String TAG = MainActivity.class.getName();
 
-    @Bind(R.id.statusTextView)
-    TextView statusText;
     @Bind(R.id.enterFpvButton)
     Button enterFpvButton;
     DJIApiUtil djiApiUtil;
@@ -59,7 +62,17 @@ public class LaunchActivity extends Activity {
             }
         });
 
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(GroundControlApplication.FLAG_CONNECTION_CHANGE);
+        registerReceiver(mReceiver, filter);
     }
+
+    protected BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            updateStatus();
+        }
+    };
 
     @Override
     public void onResume() {
@@ -69,9 +82,18 @@ public class LaunchActivity extends Activity {
     }
 
     private void updateStatus() {
-        if (statusText == null) return;
+        if (enterFpvButton == null) return;
         DJIBaseProduct product = GroundControlApplication.getProductInstance();
-        statusText.setText(djiApiUtil.getAircraftConnectionStatus(product));
+        enterFpvButton.setText(djiApiUtil.getAircraftConnectionStatus(product));
+        if (product != null && product.isConnected()){
+            enterFpvButton.setBackgroundColor(Color.parseColor("#228B22"));
+            enterFpvButton.setEnabled(true);
+            enterFpvButton.setAlpha(1.0f);
+        } else {
+            enterFpvButton.setBackgroundColor(Color.parseColor("#FF0000"));
+            enterFpvButton.setEnabled(false);
+            enterFpvButton.setAlpha(0.5f);
+        }
     }
 
 

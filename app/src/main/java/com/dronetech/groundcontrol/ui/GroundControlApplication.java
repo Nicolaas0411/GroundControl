@@ -76,7 +76,7 @@ public class GroundControlApplication extends Application {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Register SDK Success", Toast.LENGTH_LONG).show();
                     }
                 });
             } else {
@@ -85,7 +85,7 @@ public class GroundControlApplication extends Application {
 
                     @Override
                     public void run() {
-                        Toast.makeText(getApplicationContext(), "register sdk fails, check network is available", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Register SDK Fails, check network is available...", Toast.LENGTH_LONG).show();
                     }
                 });
 
@@ -119,7 +119,6 @@ public class GroundControlApplication extends Application {
 
         @Override
         public void onProductConnectivityChanged(boolean isConnected) {
-
             notifyStatusChange();
         }
 

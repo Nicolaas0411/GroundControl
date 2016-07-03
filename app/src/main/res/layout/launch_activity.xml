@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:id="@+id/launchView">
 
     <TextView
@@ -9,35 +10,35 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Connect Aircraft"
+        android:textColor="@color/black"
         android:id="@+id/connectAircraftTextView"
         android:layout_gravity="center_horizontal"
+        android:paddingTop="30dp"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Camera"
+        style="@style/Widget.AppCompat.Button"
+        android:textColor="@color/white"
         android:id="@+id/enterFpvButton"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Status"
-        android:id="@+id/statusTextView"
-        android:layout_above="@+id/enterFpvButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp" />
 
     <pl.droidsonroids.gif.GifImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+
         android:scaleType="fitCenter"
-        android:src="@drawable/phantom4_gif"/>
+        android:src="@drawable/phantom4_gif"
+        android:id="@+id/phantomGif" />
 
 </RelativeLayout>
