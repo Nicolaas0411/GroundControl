@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.dronetech.groundcontrol.R;
 import com.dronetech.groundcontrol.util.DJIApiUtil;
-import com.dronetech.groundcontrol.util.GifView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

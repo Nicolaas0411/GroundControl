@@ -33,12 +33,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp" />
 
-    <com.dronetech.groundcontrol.util.GifView
-        android:id="@+id/phantomGif"
+    <pl.droidsonroids.gif.GifImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="@+id/connectAircraftTextView"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerInParent="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/phantom4_gif"/>
 
 </RelativeLayout>

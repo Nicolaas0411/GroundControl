@@ -56,12 +56,14 @@
         <!-- DJI SDK -->
 
         <activity android:name=".ui.MainActivity"
-            android:theme="@android:style/Theme.Material">
+            android:theme="@android:style/Theme.Material"
+            android:screenOrientation="landscape">
         </activity>
 
         <activity android:name=".ui.LaunchActivity"
             android:theme="@android:style/Theme.Material"
-            android:hardwareAccelerated="true">
+            android:screenOrientation="portrait"
+            android:hardwareAccelerated="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
