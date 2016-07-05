@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -18,6 +19,7 @@ import android.widget.Button;
 
 import com.dronetech.groundcontrol.R;
 import com.dronetech.groundcontrol.util.DJIApiUtil;
+import com.dronetech.groundcontrol.util.ImageAdapter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -32,6 +34,8 @@ public class LaunchActivity extends Activity {
 
     @Bind(R.id.enterFpvButton)
     Button enterFpvButton;
+    @Bind(R.id.view_pager)
+    ViewPager viewPager;
     DJIApiUtil djiApiUtil;
 
     @Override
@@ -53,6 +57,10 @@ public class LaunchActivity extends Activity {
                     }
                     , 1);
         }
+
+        ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
+        ImageAdapter adapter = new ImageAdapter(this);
+        viewPager.setAdapter(adapter);
 
         enterFpvButton.setOnClickListener(new View.OnClickListener() {
             @Override
